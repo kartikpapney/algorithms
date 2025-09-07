@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ProblemModal from './ProblemModal';
 import backendManager from '../backend-config';
+import './ProblemDetail.css';
 
 const ProblemDetailPage = () => {
   const { problemId } = useParams();
@@ -53,45 +54,28 @@ const ProblemDetailPage = () => {
 
   if (isLoading) {
     return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh',
-        fontSize: '18px'
-      }}>
-        Loading problem...
+      <div className="loading-state">
+        <div className="loading-container">
+          <h2>Loading problem...</h2>
+          <p>Please wait while we fetch the problem details</p>
+        </div>
       </div>
     );
   }
 
   if (!problem) {
     return (
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column',
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh',
-        fontSize: '18px',
-        gap: '16px'
-      }}>
-        <h2>Problem not found</h2>
-        <p>Problem with ID "{problemId}" could not be found.</p>
-        <button 
-          onClick={handleClose}
-          style={{
-            background: '#007bff',
-            color: 'white',
-            border: 'none',
-            padding: '12px 24px',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontSize: '16px'
-          }}
-        >
-          Back to Problems List
-        </button>
+      <div className="error-state">
+        <div className="error-container">
+          <h2>Problem not found</h2>
+          <p>Problem with ID "{problemId}" could not be found.</p>
+          <button 
+            onClick={handleClose}
+            className="back-button"
+          >
+            Back to Problems List
+          </button>
+        </div>
       </div>
     );
   }

@@ -58,11 +58,15 @@ export const ProblemListPage = () => {
   };
 
   const getDifficultyColor = (difficulty) => {
+    // Use CSS custom properties for theme consistency
+    const root = document.documentElement;
+    const computedStyle = getComputedStyle(root);
+    
     switch (difficulty?.toLowerCase()) {
-      case 'easy': return '#22c55e';
-      case 'medium': return '#f59e0b';
-      case 'hard': return '#ef4444';
-      default: return '#64748b';
+      case 'easy': return computedStyle.getPropertyValue('--difficulty-easy').trim() || '#10b981';
+      case 'medium': return computedStyle.getPropertyValue('--difficulty-medium').trim() || '#f59e0b';
+      case 'hard': return computedStyle.getPropertyValue('--difficulty-hard').trim() || '#f87171';
+      default: return computedStyle.getPropertyValue('--text-tertiary').trim() || '#64748b';
     }
   };
 

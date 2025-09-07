@@ -1,0 +1,146 @@
+/* Theme Variables - GoodNotes Style Colors */
+
+:root {
+  /* Light Theme Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f1f3f4;
+  --bg-elevated: #ffffff;
+  
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --text-inverse: #ffffff;
+  
+  --border-primary: #1f2937;
+  --border-secondary: #e5e7eb;
+  --border-tertiary: #f3f4f6;
+  
+  --accent-primary: #1f2937;
+  --accent-secondary: #374151;
+  --accent-tertiary: #6b7280;
+  
+  --success: #059669;
+  --success-bg: #d1fae5;
+  --warning: #d97706;
+  --warning-bg: #fed7aa;
+  --error: #dc2626;
+  --error-bg: #fecaca;
+  --info: #2563eb;
+  --info-bg: #dbeafe;
+  
+  --difficulty-easy: #059669;
+  --difficulty-medium: #d97706;
+  --difficulty-hard: #dc2626;
+  
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  --hover-transform: translateY(-1px);
+  --hover-shadow: 2px 2px 0px var(--accent-primary);
+}
+
+/* Dark Theme Colors - GoodNotes Style */
+[data-theme="dark"] {
+  --bg-primary: #1a1612;
+  --bg-secondary: #211e18;
+  --bg-tertiary: #28241e;
+  --bg-elevated: #211e18;
+  
+  --text-primary: #e8e5dc;
+  --text-secondary: #c8bfa6;
+  --text-tertiary: #9a8f7a;
+  --text-inverse: #1a1612;
+  
+  --border-primary: #c8bfa6;
+  --border-secondary: #4a453c;
+  --border-tertiary: #353020;
+  
+  --accent-primary: #c8bfa6;
+  --accent-secondary: #9a8f7a;
+  --accent-tertiary: #6b6052;
+  
+  --success: #5a7342;
+  --success-bg: #2a3220;
+  --warning: #a67c47;
+  --warning-bg: #3a2f20;
+  --error: #a15a5a;
+  --error-bg: #3a2020;
+  --info: #4a6b8a;
+  --info-bg: #202a3a;
+  
+  --difficulty-easy: #5a7342;
+  --difficulty-medium: #a67c47;
+  --difficulty-hard: #a15a5a;
+  
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+  
+  --hover-transform: translateY(-1px);
+  --hover-shadow: 2px 2px 0px var(--accent-primary);
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-primary);
+  color: var(--text-primary);
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 12px;
+}
+
+.theme-toggle:hover {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  transform: var(--hover-transform);
+  box-shadow: var(--hover-shadow);
+}
+
+/* Utility Classes */
+.bg-primary { background: var(--bg-primary); }
+.bg-secondary { background: var(--bg-secondary); }
+.bg-tertiary { background: var(--bg-tertiary); }
+.bg-elevated { background: var(--bg-elevated); }
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-inverse { color: var(--text-inverse); }
+
+.border-primary { border-color: var(--border-primary); }
+.border-secondary { border-color: var(--border-secondary); }
+.border-tertiary { border-color: var(--border-tertiary); }
+
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }

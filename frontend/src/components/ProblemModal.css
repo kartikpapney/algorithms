@@ -1,3 +1,6 @@
+/* Import theme variables */
+@import '../theme.css';
+
 /* Full Page Layout */
 .fullpage-container {
   position: fixed;
@@ -5,7 +8,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   z-index: 1000;
   overflow-y: auto;
   overflow-x: hidden;
@@ -18,8 +21,8 @@
 }
 
 .fullpage-header {
-  background: white;
-  border-bottom: 2px solid #000000;
+  background: var(--bg-elevated);
+  border-bottom: 2px solid var(--border-primary);
   padding: 20px 24px;
   display: flex;
   align-items: center;
@@ -27,7 +30,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .header-left {
@@ -50,22 +53,22 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: white;
-  color: #000000;
-  border: 2px solid #000000;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 2px solid var(--border-primary);
   padding: 10px 16px;
   border-radius: 0;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: 2px 2px 0px var(--border-primary);
 }
 
 .screenshot-btn:hover {
-  background: #000000;
-  color: white;
-  box-shadow: 0px 0px 0px #000000;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  box-shadow: 0px 0px 0px var(--border-primary);
   transform: translate(2px, 2px);
 }
 
@@ -73,8 +76,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #6c757d;
-  color: white;
+  background: var(--accent-secondary);
+  color: var(--text-inverse);
   border: none;
   padding: 10px 16px;
   border-radius: 6px;
@@ -85,14 +88,14 @@
 }
 
 .back-button:hover {
-  background: #5a6268;
+  background: var(--accent-tertiary);
 }
 
 .problem-title {
   margin: 0 0 8px 0;
   font-size: 28px;
   font-weight: 700;
-  color: #000000;
+  color: var(--text-primary);
   line-height: 1.2;
 }
 
@@ -107,22 +110,22 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: white;
-  color: #000000;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   text-decoration: none;
   padding: 10px 16px;
-  border: 2px solid #000000;
+  border: 2px solid var(--border-primary);
   border-radius: 0;
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s ease;
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: 2px 2px 0px var(--border-primary);
 }
 
 .external-link-btn:hover {
-  background: #000000;
-  color: white;
-  box-shadow: 0px 0px 0px #000000;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  box-shadow: 0px 0px 0px var(--border-primary);
   transform: translate(2px, 2px);
 }
 
@@ -144,19 +147,19 @@
 }
 
 .problem-content {
-  background: white;
-  border: 2px solid #000000;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-primary);
   border-radius: 8px;
   padding: 24px;
-  box-shadow: 4px 4px 0px #000000;
+  box-shadow: 4px 4px 0px var(--border-primary);
 }
 
 .solution-content {
-  background: white;
-  border: 2px solid #000000;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-primary);
   border-radius: 8px;
   padding: 2px;
-  box-shadow: 4px 4px 0px #000000;
+  box-shadow: 4px 4px 0px var(--border-primary);
   min-width: 0;
   overflow: hidden;
 }
@@ -173,7 +176,7 @@
   margin: 0 0 16px 0;
   font-size: 20px;
   font-weight: 700;
-  color: #000000;
+  color: var(--text-primary);
 }
 
 /* Responsive design for smaller screens */
@@ -238,8 +241,8 @@
   border-radius: 0;
   font-size: 12px;
   font-weight: 600;
-  background: #2c2c2e;
-  color: white;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -257,16 +260,16 @@
   width: 40px;
   height: 40px;
   border-radius: 0;
-  background: #2c2c2e;
-  color: white;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
   text-decoration: none;
   transition: all 0.2s ease;
-  border: 2px solid #2c2c2e;
+  border: 2px solid var(--border-primary);
 }
 
 .external-link:hover {
-  background: white;
-  color: #2c2c2e;
+  background: var(--bg-primary);
+  color: var(--accent-primary);
   transform: translateY(-1px);
 }
 
@@ -276,17 +279,17 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  border: 2px solid #2c2c2e;
+  border: 2px solid var(--border-primary);
   border-radius: 0;
-  background: white;
-  color: #2c2c2e;
+  background: var(--bg-primary);
+  color: var(--accent-primary);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .close-button:hover {
-  background: #2c2c2e;
-  color: white;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
 }
 
 .modal-body {
@@ -304,7 +307,7 @@
   margin: 0 0 16px 0;
   font-size: 18px;
   font-weight: 700;
-  color: #000000;
+  color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -317,12 +320,39 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
   line-height: 1.6;
-  color: #000000;
+  color: var(--text-primary);
   white-space: normal;
   word-wrap: break-word;
   margin: 0;
-  background: white;
-  padding: 4px;
+  background: var(--bg-elevated) !important;
+  padding: 16px;
+  border-radius: 4px;
+  border: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* Override any inline styles in description HTML */
+.description-content * {
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* Specific overrides for common elements in description */
+.description-content div,
+.description-content p,
+.description-content span {
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border: none !important;
+  border-left: none !important;
 }
 
 /* Preserve line breaks only where needed */
@@ -337,18 +367,43 @@
 /* Handle code blocks properly */
 .description-content pre {
   white-space: pre-wrap;
-  background: #f8f8f8;
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
   padding: 12px;
   border-radius: 4px;
   overflow-x: auto;
   margin: 12px 0;
+  border: 1px solid var(--border-secondary);
+}
+
+/* Remove any blockquote borders that might be causing the blue line */
+.description-content blockquote {
+  border: none !important;
+  border-left: none !important;
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  margin: 12px 0 !important;
+  padding: 12px !important;
+}
+
+/* Remove borders from any other elements */
+.description-content ul,
+.description-content ol,
+.description-content li,
+.description-content table,
+.description-content td,
+.description-content th {
+  border: none !important;
+  border-left: none !important;
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
 }
 
 /* Style for inline code blocks in description */
 .description-content code,
 .description-content .inline-code {
-  background: #f1f1f1;
-  color: #d73a49;
+  background: var(--bg-tertiary);
+  color: var(--error);
   padding: 2px 4px;
   border-radius: 3px;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
@@ -359,21 +414,21 @@
 /* Style for bold text in description */
 .description-content strong {
   font-weight: 600;
-  color: #000;
+  color: var(--text-primary);
 }
 
 .description-text {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
   line-height: 1.6;
-  color: #000000;
+  color: var(--text-primary);
   white-space: normal;
   word-wrap: break-word;
   margin: 0;
-  background: white;
+  background: var(--bg-elevated);
   padding: 16px;
-  border-radius: 0;
-  border: 2px solid #000000;
+  border-radius: 4px;
+  border: 2px solid var(--border-primary);
 }
 
 .examples-container {
@@ -383,17 +438,22 @@
 }
 
 .example-card {
-  background: white;
-  border: 2px solid #000000;
-  border-radius: 0;
+  background: var(--bg-elevated) !important;
+  border: 2px solid var(--border-primary);
+  border-radius: 4px;
   padding: 16px;
+}
+
+.example-card * {
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
 }
 
 .example-card h4 {
   margin: 0 0 12px 0;
   font-size: 14px;
   font-weight: 700;
-  color: #000000;
+  color: var(--text-primary);
   text-transform: uppercase;
 }
 
@@ -408,30 +468,55 @@
 }
 
 .example-item strong {
-  color: #000000;
+  color: var(--text-primary);
   font-weight: 700;
 }
 
 .example-item code {
-  background: #f0f0f0;
+  background: var(--bg-tertiary);
   padding: 2px 6px;
   border-radius: 0;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 13px;
-  color: #000000;
-  border: 1px solid #000000;
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
 }
 
 .solution-container {
   overflow: hidden;
   width: 100%;
   max-width: 100%;
+  background: var(--bg-elevated) !important;
 }
 
 .solution-container > div {
   overflow: auto !important;
   max-width: 100%;
   border-radius: 6px;
+  background: var(--bg-elevated) !important;
+}
+
+.solution-container pre {
+  background: var(--bg-elevated) !important;
+  margin: 0 !important;
+}
+
+.solution-container > div > pre {
+  background: var(--bg-elevated) !important;
+}
+
+/* Ensure uniform line styling in code blocks */
+.solution-container span[data-line-number],
+.solution-container .token-line,
+.solution-container .code-line {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.solution-container pre code,
+.solution-container pre code span {
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 /* Custom scrollbar for code */
@@ -462,16 +547,18 @@
 
 .no-solution {
   padding: 16px;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
   text-align: center;
 }
 
 .debug-solution {
   margin-top: 16px;
   text-align: left;
-  background: #fff;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   font-size: 12px;
 }
@@ -483,18 +570,18 @@
 }
 
 .problem-metadata {
-  background: white;
+  background: var(--bg-elevated);
   padding: 16px 24px;
-  border-top: 2px solid #000000;
+  border-top: 2px solid var(--border-primary);
 }
 
 .metadata-item {
   font-size: 14px;
-  color: #666666;
+  color: var(--text-secondary);
 }
 
 .metadata-item strong {
-  color: #000000;
+  color: var(--text-primary);
   font-weight: 700;
 }
 

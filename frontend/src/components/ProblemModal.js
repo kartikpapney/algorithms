@@ -1,10 +1,13 @@
 import { ExternalLink, Camera } from 'lucide-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneLight, okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import html2canvas from 'html2canvas';
+import { useTheme } from '../contexts/ThemeContext';
 import './ProblemModal.css';
 
 const ProblemModal = ({ problem, onClose }) => {
+  const { isDark } = useTheme();
+  
   if (!problem) return null;
 
   const handleScreenshot = async () => {
@@ -191,7 +194,7 @@ const ProblemModal = ({ problem, onClose }) => {
                           ? (problem.solution.language || 'java')
                           : 'java'
                       }
-                      style={oneLight}
+                      style={isDark ? okaidia : oneLight}
                       customStyle={{
                         margin: 0,
                         fontSize: '14px',
@@ -202,17 +205,25 @@ const ProblemModal = ({ problem, onClose }) => {
                         fontWeight: '400',
                         letterSpacing: '0.3px',
                         width: '100%',
-                        whiteSpace: 'pre'
+                        whiteSpace: 'pre',
+                        background: 'transparent',
+                        borderRadius: '0px'
                       }}
                       showLineNumbers={false}
-                      wrapLines={false}
+                      wrapLines={true}
                       wrapLongLines={false}
                       useInlineStyles={true}
                       showInlineLineNumbers={false}
                       startingLineNumber={1}
-                      lineProps={{
-                        style: { display: 'block', whiteSpace: 'pre' }
-                      }}
+                      lineProps={(lineNumber) => ({
+                        style: { 
+                          display: 'block', 
+                          whiteSpace: 'pre',
+                          backgroundColor: 'transparent',
+                          margin: 0,
+                          padding: 0
+                        }
+                      })}
                     >
                       {problem.solution}
                     </SyntaxHighlighter>
