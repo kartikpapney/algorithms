@@ -1,7 +1,7 @@
 class BackendManager {
   constructor() {
     console.log(process.env.REACT_APP_BACKEND_URL)
-    this.baseUrl = `${process.env.REACT_APP_BACKEND_URL}`;
+    this.baseUrl = `${process.env.REACT_APP_BACKEND_URL}/api`;
   }
 
   async getProblems(searchQuery = '') {
