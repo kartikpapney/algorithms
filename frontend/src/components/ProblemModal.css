@@ -53,18 +53,14 @@
 }
 
 .header-left {
-  flex: 0 0 auto;
-}
-
-.header-center {
-  flex: 1;
-  text-align: center;
-  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .header-right {
-  flex: 0 0 auto;
   display: flex;
+  align-items: center;
   gap: 12px;
 }
 
@@ -262,19 +258,86 @@
 @media (max-width: 768px) {
   .fullpage-body {
     padding: 16px;
+    overflow-x: auto;
+  }
+  
+  .content-grid {
+    display: block;
+    max-width: 100%;
   }
   
   .problem-content,
   .solution-content {
-    padding: 2px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    max-width: 100%;
   }
   
-  .problem-title {
+  .problem-content {
+    padding: 16px;
+  }
+  
+  .solution-content {
+    padding: 2px;
+    overflow-x: auto;
+  }
+  
+  .problem-title-header {
     font-size: 24px;
   }
   
-  .fullpage-header {
+  .app-header {
     padding: 16px;
+  }
+  
+  .header-content {
+    max-width: 100%;
+  }
+  
+  /* Ensure problem description content scrolls horizontally when needed */
+  .description-content {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  .description-content pre,
+  .description-content code {
+    white-space: pre;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  /* Ensure tables and wide content scroll horizontally */
+  .description-content table {
+    min-width: 100%;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+  }
+  
+  /* Solution container mobile optimizations */
+  .solution-container {
+    overflow-x: auto !important;
+    max-width: 100%;
+  }
+  
+  .solution-container > div {
+    overflow-x: auto !important;
+    max-width: 100%;
+    min-width: 300px; /* Minimum width to prevent code from being too cramped */
+  }
+  
+  .solution-container pre {
+    overflow-x: auto !important;
+    white-space: pre !important;
+    word-wrap: normal !important;
+    min-width: 300px;
+  }
+  
+  /* Ensure code blocks maintain readability on mobile */
+  .solution-container code {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
   }
 }
 

@@ -90,10 +90,6 @@ const ProblemModal = ({ problem, onClose }) => {
               <h1 className="app-title">Algorithms</h1>
             </div>
             
-            <div className="header-center">
-              {/* Empty for symmetry */}
-            </div>
-            
             <div className="header-right">
               <ThemeToggle />
             </div>
