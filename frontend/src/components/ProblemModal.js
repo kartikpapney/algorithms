@@ -1,134 +1,60 @@
-import { ExternalLink, Camera } from 'lucide-react';
+import React, { useEffect, useCallback } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight, okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import html2canvas from 'html2canvas';
 import { useTheme } from '../contexts/ThemeContext';
+import ThemeToggle from './ThemeToggle';
 import './ProblemModal.css';
 
 const ProblemModal = ({ problem, onClose }) => {
   const { isDark } = useTheme();
   
-  if (!problem) return null;
-
-  const handleScreenshot = async () => {
+  const handleScreenshot = useCallback(async () => {
     try {
-
-      const screenshotContainer = document.createElement('div');
-      screenshotContainer.style.cssText = `
-        position: fixed;
-        top: -10000px;
-        left: 0;
-        width: 768px;
-        background: white;
-        padding: 40px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      `;
-
-      const titleElement = document.createElement('div');
-      titleElement.style.cssText = `
-        text-align: center;
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 40px;
-        color: #000;
-        border-bottom: 3px solid #000;
-        padding-bottom: 20px;
-      `;
-      titleElement.textContent = `${problem.number ? `${problem.number}. ` : ''}${problem.title.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}`;
-
-      const originalProblemContent = document.querySelector('.problem-content');
-      if (originalProblemContent) {
-        const problemClone = originalProblemContent.cloneNode(true);
-        problemClone.style.cssText = `
-          width: 100%;
-          margin-bottom: 40px;
-          background: white;
-          border: 2px solid #000;
-          border-radius: 8px;
-          padding: 24px;
-          box-shadow: 4px 4px 0px #000;
-        `;
-        screenshotContainer.appendChild(titleElement);
-        screenshotContainer.appendChild(problemClone);
+      // Capture the entire fullpage-container
+      const fullPageElement = document.querySelector('.fullpage-container');
+      if (!fullPageElement) {
+        alert('Could not find the page content to screenshot.');
+        return;
       }
 
-      const originalSolutionContent = document.querySelector('.solution-content');
-      if (originalSolutionContent && problem.solution) {
-        const solutionClone = originalSolutionContent.cloneNode(true);
-        solutionClone.style.cssText = `
-          width: 100%;
-          background: white;
-          border: 2px solid #000;
-          border-radius: 8px;
-          padding: 24px;
-          box-shadow: 4px 4px 0px #000;
-        `;
-        
-        const solutionTitle = document.createElement('h2');
-        solutionTitle.style.cssText = `
-          font-size: 24px;
-          font-weight: bold;
-          margin-bottom: 20px;
-          color: #000;
-          text-align: center;
-        `;
-        solutionTitle.textContent = 'Solution:';
-        
-        const codeElements = solutionClone.querySelectorAll('pre, code');
-        codeElements.forEach(codeEl => {
-          codeEl.style.cssText += `
-            white-space: pre-wrap !important;
-            word-wrap: break-word !important;
-            overflow-wrap: break-word !important;
-            max-width: 100% !important;
-            overflow-x: hidden !important;
-          `;
-        });
-        
-        const syntaxHighlighters = solutionClone.querySelectorAll('[class*="language-"], .token');
-        syntaxHighlighters.forEach(el => {
-          el.style.cssText += `
-            white-space: pre-wrap !important;
-            word-wrap: break-word !important;
-            overflow-wrap: break-word !important;
-          `;
-        });
-        
-        solutionClone.insertBefore(solutionTitle, solutionClone.firstChild);
-        screenshotContainer.appendChild(solutionClone);
-      }
-
-      document.body.appendChild(screenshotContainer);
-
-      await new Promise(resolve => setTimeout(resolve, 300));
-
-      const canvas = await html2canvas(screenshotContainer, {
-        backgroundColor: '#ffffff',
-        scale: 2,
+      // Use html2canvas to capture the full page
+      const canvas = await html2canvas(fullPageElement, {
+        backgroundColor: isDark ? '#1a1612' : '#ffffff',
+        scale: 1,
         logging: false,
         useCORS: true,
         allowTaint: true,
-        width: 768,
-        height: screenshotContainer.scrollHeight
+        width: fullPageElement.scrollWidth,
+        height: fullPageElement.scrollHeight,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: window.innerWidth,
+        windowHeight: window.innerHeight
       });
 
-      document.body.removeChild(screenshotContainer);
-
+      // Convert to blob and copy to clipboard
       canvas.toBlob(async (blob) => {
         try {
           const item = new ClipboardItem({ 'image/png': blob });
           await navigator.clipboard.write([item]);
           
-          const button = document.querySelector('.screenshot-btn');
-          const originalText = button.innerHTML;
-          button.innerHTML = '<svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Copied!';
-          
-          setTimeout(() => {
-            button.innerHTML = originalText;
-          }, 2000);
+          // Show success feedback
+          alert('Full page screenshot copied to clipboard!');
         } catch (clipboardError) {
           console.error('Error copying to clipboard:', clipboardError);
-          alert('Screenshot captured but could not copy to clipboard. Your browser may not support this feature.');
+          
+          // Fallback: create download link
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${problem.title}-screenshot.png`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          
+          alert('Screenshot downloaded (clipboard not supported).');
         }
       }, 'image/png');
 
@@ -136,40 +62,41 @@ const ProblemModal = ({ problem, onClose }) => {
       console.error('Error taking screenshot:', error);
       alert('Error taking screenshot. Please try again.');
     }
-  };
+  }, [isDark, problem.title]);
+
+  // Add keyboard shortcut for screenshot
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === 'S') {
+        event.preventDefault();
+        handleScreenshot();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleScreenshot]);
+
+  if (!problem) return null;
 
   return (
     <div className="fullpage-container">
       <div className="fullpage-content">
-        <div className="fullpage-header">
-          
-          <div className="header-center">
-            <h1 className="problem-title">
-              {problem.number && `${problem.number}. `}
-              {problem.title.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
-            </h1>
-          </div>
-          
-          <div className="header-right">
-            <button 
-              onClick={handleScreenshot}
-              className="screenshot-btn"
-              title="Take Screenshot"
-            >
-              <Camera size={20} />
-              Capture
-            </button>
-            {problem.url && (
-              <a 
-                href={problem.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="external-link-btn"
-              >
-                <ExternalLink size={20} />
-                Checkout
-              </a>
-            )}
+        <div className="app-header">
+          <div className="header-content">
+            <div className="header-left">
+              <h1 className="app-title">Algorithms</h1>
+            </div>
+            
+            <div className="header-center">
+              {/* Empty for symmetry */}
+            </div>
+            
+            <div className="header-right">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
 
@@ -177,6 +104,26 @@ const ProblemModal = ({ problem, onClose }) => {
           <div className="content-grid">
             <div className="problem-content">
               <div className="problem-section">
+                {/* Clickable Problem Title */}
+                {problem.url ? (
+                  <a 
+                    href={problem.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="problem-title-link"
+                  >
+                    <h1 className="problem-title-header">
+                      {problem.number && `${problem.number}. `}
+                      {problem.title.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                    </h1>
+                  </a>
+                ) : (
+                  <h1 className="problem-title-header">
+                    {problem.number && `${problem.number}. `}
+                    {problem.title.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                  </h1>
+                )}
+                
                 <div 
                     className="description-content"
                     dangerouslySetInnerHTML={{ __html: problem.description }}

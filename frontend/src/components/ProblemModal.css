@@ -20,6 +20,25 @@
   flex-direction: column;
 }
 
+/* Shared header styling - matches ProblemList */
+.app-header {
+  background: var(--bg-elevated);
+  border-bottom: 2px solid var(--border-primary);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .fullpage-header {
   background: var(--bg-elevated);
   border-bottom: 2px solid var(--border-primary);
@@ -91,12 +110,49 @@
   background: var(--accent-tertiary);
 }
 
+/* Header title styling to match ProblemList */
+.app-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
 .problem-title {
   margin: 0 0 8px 0;
   font-size: 28px;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.2;
+}
+
+/* New problem title styles for the moved title */
+.problem-title-header {
+  margin: 0 0 24px 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.problem-title-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin: -6px;
+}
+
+.problem-title-link:hover {
+  background: var(--bg-secondary);
+  transform: translateY(-2px);
+}
+
+.problem-title-link:hover .problem-title-header {
+  color: var(--accent-primary);
 }
 
 .problem-badges {

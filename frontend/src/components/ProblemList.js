@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import backendManager from '../backend-config';
+import ThemeToggle from './ThemeToggle';
 import './ProblemList.css'
 
 export const ProblemListPage = () => {
@@ -84,6 +85,9 @@ export const ProblemListPage = () => {
         <div className="header-content">
           <div className="header-left">
             <h1 className="app-title">Algorithms</h1>
+          </div>
+          <div className="header-right">
+            <ThemeToggle />
           </div>
         </div>
       </header>

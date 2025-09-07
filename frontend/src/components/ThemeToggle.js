@@ -11,7 +11,6 @@ const ThemeToggle = () => {
       aria-label="Toggle theme"
     >
       <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
-      <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
     </button>
   );
 };
